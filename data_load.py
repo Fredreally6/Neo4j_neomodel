@@ -1,6 +1,6 @@
 import pandas as pd
 
-from neomodel import db,config, StructuredNode,StructuredRel, StringProperty, IntegerProperty, RelationshipTo, RelationshipFrom
+from neomodel import db, config
 from model import Rootnode, Normalnode
 
 config.DATABASE_URL = "bolt://neo4j:password@localhost:7687"
