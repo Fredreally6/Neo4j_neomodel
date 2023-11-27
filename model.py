@@ -1,4 +1,4 @@
-from neomodel import db,config, StructuredNode, StringProperty
+from neomodel import StructuredNode, StringProperty
 
 class Rootnode(StructuredNode):
     name = StringProperty(required = True)
