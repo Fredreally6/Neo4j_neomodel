@@ -21,8 +21,6 @@ alpha = [1, 0.8, 0.5, 0.1]
 # print(result_list_A)
 
 
-
-
 def OneGraph(a, b, level):
 
     #Match nodes
@@ -59,29 +57,36 @@ def OneGraph(a, b, level):
 
     # Compare with two lists to find the relations
     t_count = 1
-    s_count = 0
+    s_count = 1
+    numelist = []
+    nume = 0
+    denoA = 0
+    denoB = 0
     pair_result = []
     for i in result_list_A:
         for j in result_list_B:
             if i[1]==j[1]:
                 if i[2]==j[2]:
-                    t = tNorm(i[3],j[3])
-                    t_count = tNorm(t_count, t)
-                    s = sNorm(i[3],j[3])
-                    s_count = sNorm(s_count, s)
-                    print(i)
-                    print(j)
-                    print(t)
-                    print(s)
-                    print(t_count)
-                    print(s_count)
-                    print(t_count/s_count)
+                    numelist.append(tNorm(i[3],j[3]))
                 else:
                     pair_result.append((i[2], j[2]))
 
+
+    for i in range(len(result_list_A)):
+        denoA = sNorm(denoA, result_list_A[i][3])
+
+    for i in range(len(result_list_B)):
+        denoB = sNorm(denoB, result_list_B[i][3])
+
+    for i in range(len(numelist)):
+        nume = sNorm(nume, numelist[i])
+
+    deno = max(denoA, denoB)
+
     print("*****************************")
     print("Comparing "+a+" and "+b+" on level "+str(level))
-    print("Number of Absolutely Same Relation: "+str(t_count))
+    print("Results of T-norm:" + str(nume) + " and T-conorm: " + str(deno) )
+    print("Next pair waiting to calculate: ")
     print(pair_result)
     print(" ")
 
@@ -91,19 +96,16 @@ def OneGraph(a, b, level):
         if length == 0: 
             return 0
         else: 
-            return t_count/s_count
+            return nume/deno
     
     tmp = 0
     for it in pair_result:
-        tmp += OneGraph(it[0],it[1],level+1)/length
-        print(tmp)
+        tmp += OneGraph(it[0],it[1],level+1)/deno
+        # print(tmp)
 
-    print(t_count)
-    print(s_count)
-    similarity = (t_count + alpha[level+1]*tmp)/s_count
-    print(similarity,t_count, tmp, alpha[level+1],level)
-   
-    # print(similarity)
+    similarity = (nume + alpha[level+1]*tmp)/deno
+    # print(similarity,t_count, tmp, alpha[level+1],level)
+
     return similarity
 
 

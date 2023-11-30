@@ -1,7 +1,7 @@
 # T-norm and S-norm here
 
 def tNorm(a,b):
-    return min(a,b)
+    return a*b
 
 def sNorm(a,b):
-    return max(a,b)
+    return a+b-a*b
