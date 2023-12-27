@@ -19,17 +19,19 @@ for i in range(0,data.shape[1]):
     label.append(data.columns[i])
 
 
-nodea = Rootnode(name = 'A').save()
-nodeb = Rootnode(name = 'B').save()
+nodea1 = Rootnode(name = 'A1').save()
+nodeb1 = Rootnode(name = 'B1').save()
+nodea2 = Rootnode(name = 'A2').save()
+nodeb2 = Rootnode(name = 'B2').save()
 
 for i in range(0, data.shape[0]):
     isRoot = False
-    if(entity1[i]=='A'):
-        node1 = Rootnode.nodes.get(name = 'A')
+    if(entity1[i]=='A1' or entity1[i]=='B1' or entity1[i]=='A2' or entity1[i]=='B2'):
+        node1 = Rootnode.nodes.get(name = entity1[i])
         isRoot = True
-    elif(entity1[i]=='B'):
-        node1 = Rootnode.nodes.get(name = 'B')
-        isRoot = True
+    # elif(entity1[i]=='B1'):
+    #     node1 = Rootnode.nodes.get(name = 'B1')
+    #     isRoot = True
     elif(Normalnode.nodes.get_or_none(name = entity1[i])) is None:
         node1 = Normalnode(name = entity1[i]).save()
     else:

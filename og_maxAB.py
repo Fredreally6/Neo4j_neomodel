@@ -9,13 +9,13 @@ alpha = [1, 0.8, 0.5, 0.1]
 def OneGraph(a, b, level):
 
     #Match nodes
-    if (a == 'A'):
-        queryA = "MATCH (i:Rootnode {name: \'A\' })-[j]->(k) return i,j,k"
+    if (a == 'A1' or a == 'B1'):
+        queryA = "MATCH (i:Rootnode {name: \'"+ a +"\' })-[j]->(k) return i,j,k"
     else:
         queryA = "MATCH (i:Normalnode {name: \'"+ a +"\' })-[j]->(k) return i,j,k"
     
-    if (b == 'B'):
-        queryB = "MATCH (i:Rootnode {name: \'B\' })-[j]->(k) return i,j,k"
+    if (b == 'B1' or b == 'A1'):
+        queryB = "MATCH (i:Rootnode {name: \'"+ b +"\' })-[j]->(k) return i,j,k"
     else:
         queryB = "MATCH (i:Normalnode {name: \'"+ b +"\' })-[j]->(k) return i,j,k"
 
@@ -41,8 +41,6 @@ def OneGraph(a, b, level):
 
 
     # Compare with two lists to find the relations
-    t_count = 1
-    s_count = 1
     numelist = []
     nume = 0
     denoA = 0
@@ -94,5 +92,5 @@ def OneGraph(a, b, level):
     return similarity
 
 
-sim = OneGraph('A','B', 0)
+sim = OneGraph('A1','B1', 0)
 print("Similarity between A and B is %.4f" %(sim))

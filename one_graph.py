@@ -56,8 +56,6 @@ def OneGraph(a, b, level):
 
 
     # Compare with two lists to find the relations
-    t_count = 1
-    s_count = 1
     numelist = []
     nume = 0
     denoA = 0

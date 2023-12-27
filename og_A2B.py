@@ -9,12 +9,12 @@ alpha = [1, 0.8, 0.5, 0.1]
 def OneGraphA2B(a, b, level):
 
     #Match nodes
-    if (a == 'A' or a == 'B'):
+    if (a == 'A1' or a == 'B1'):
         queryA = "MATCH (i:Rootnode {name: \'"+ a +"\' })-[j]->(k) return i,j,k"
     else:
         queryA = "MATCH (i:Normalnode {name: \'"+ a +"\' })-[j]->(k) return i,j,k"
     
-    if (b == 'B' or b == 'A'):
+    if (b == 'B1' or b == 'A1'):
         queryB = "MATCH (i:Rootnode {name: \'"+ b +"\' })-[j]->(k) return i,j,k"
     else:
         queryB = "MATCH (i:Normalnode {name: \'"+ b +"\' })-[j]->(k) return i,j,k"
@@ -94,7 +94,7 @@ def OneGraphA2B(a, b, level):
     return similarity
 
 
-simA2B = OneGraphA2B('A','B', 0)
-simB2A = OneGraphA2B('B','A', 0)
-print("Similarity A to B is %.4f" %(simA2B))
-print("Similarity B to A is %.4f" %(simB2A))
+simA2B = OneGraphA2B('A1','B1', 0)
+simB2A = OneGraphA2B('B1','A1', 0)
+print("Similarity A1 to B1 is %.4f" %(simA2B))
+print("Similarity B1 to A1 is %.4f" %(simB2A))
