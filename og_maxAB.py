@@ -52,7 +52,7 @@ def OneGraph(a, b, level):
                 if i[2]==j[2]:
                     numelist.append(tNorm(i[3],j[3]))
                 else:
-                    pair_result.append((i[2], j[2]))
+                    pair_result.append((i[2],j[2],i[3],j[3]))
 
 
     for i in range(len(result_list_A)):
@@ -62,13 +62,13 @@ def OneGraph(a, b, level):
         denoB = denoB + result_list_B[i][3]
 
     for i in range(len(numelist)):
-        nume = sNorm(nume, numelist[i])
+        nume = nume + numelist[i]
 
     deno = max(denoA, denoB)
 
     print("*****************************")
     print("Comparing "+a+" and "+b+" on level "+str(level))
-    print("Results of T-norm:" + str(nume) + " and T-conorm: " + str(deno) )
+    print("Results of nume:" + str(nume) + " and deno: " + str(deno) )
     print("Next pair waiting to calculate: ")
     print(pair_result)
     print(" ")
@@ -83,14 +83,14 @@ def OneGraph(a, b, level):
     
     tmp = 0
     for it in pair_result:
-        tmp += OneGraph(it[0],it[1],level+1)/deno
-        # print(tmp)
+        tmp = tmp + tNorm(OneGraph(it[0],it[1],level+1),tNorm(it[2],it[3]))
+        # tmp += OneGraph(it[0],it[1],level+1)
 
     similarity = (nume + alpha[level+1]*tmp)/deno
-    # print(similarity,t_count, tmp, alpha[level+1],level)
+    # print(similarity, tmp, alpha[level+1],level, deno, nume)
 
     return similarity
 
 
 sim = OneGraph('A1','B1', 0)
-print("Similarity between A and B is %.4f" %(sim))
+print("Similarity between A1 and B1 is %.4f" %(sim))
