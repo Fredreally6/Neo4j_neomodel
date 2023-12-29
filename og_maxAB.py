@@ -29,14 +29,14 @@ def OneGraph(a, b, level):
         start_node = r[0]._properties['name']
         end_node = r[2]._properties['name']
         rela_type = r[1].type
-        rela_weight = r[1]._properties['weights']
+        rela_weight = r[1]._properties['weight']
         result_list_A.append((start_node, rela_type, end_node, rela_weight))
 
     for r in results_B:
         start_node = r[0]._properties['name']
         end_node = r[2]._properties['name']
         rela_type = r[1].type
-        rela_weight = r[1]._properties['weights']
+        rela_weight = r[1]._properties['weight']
         result_list_B.append((start_node, rela_type, end_node, rela_weight))
 
 

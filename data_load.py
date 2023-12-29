@@ -46,6 +46,6 @@ for i in range(0, data.shape[0]):
         query1 = "MATCH (node1:Rootnode {name: \'" + entity1[i] +"\' }) MATCH (node2:Normalnode {name:\'"+ entity2[i] +"\'})"
     else:
         query1 = "MATCH (node1:Normalnode {name: \'" + entity1[i] +"\' }) MATCH (node2:Normalnode {name:\'"+ entity2[i] +"\'})"
-    query2 = "CALL apoc.create.relationship(node1,\'"+ rela[i] +"\', {weights: " + str(weight[i]) + "}, node2) YIELD rel Return rel"
+    query2 = "CALL apoc.create.relationship(node1,\'"+ rela[i] +"\', {weight: " + str(weight[i]) + "}, node2) YIELD rel Return rel"
 
     db.cypher_query(query1+query2)
