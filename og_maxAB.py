@@ -1,14 +1,20 @@
 from neomodel import db,config
 from norm import tNorm, sNorm
+from weights import InHypOWA
 
 config.DATABASE_URL = "bolt://neo4j:password@localhost:7687"
 
-alpha = [1, 0.8, 0.5, 0.1]
+weights = []
+layer = 3
 
+def OneGraph(a, b, level, x, y):
 
-def OneGraph(a, b, level):
-
-    #Match nodes
+    global weights
+    
+    if level >= 3:
+        return 0
+    
+    # Match nodes
     if (a == 'A1' or a == 'B1'):
         queryA = "MATCH (i:Rootnode {name: \'"+ a +"\' })-[j]->(k) return i,j,k"
     else:
@@ -54,6 +60,12 @@ def OneGraph(a, b, level):
                 else:
                     pair_result.append((i[2],j[2],i[3],j[3]))
 
+    if level==0:
+        if len(numelist)==0:
+            v = 1
+        else:
+            v = len(numelist)
+        weights = InHypOWA(v,layer)
 
     for i in range(len(result_list_A)):
         denoA = denoA + result_list_A[i][3]
@@ -73,24 +85,22 @@ def OneGraph(a, b, level):
     print(pair_result)
     print(" ")
 
-    length = max(len(result_list_A),len(result_list_B))
-
-    if len(pair_result)==0 or level >= 3:
-        if length == 0: 
-            return 0
-        else: 
-            return nume/deno
-    
     tmp = 0
     for it in pair_result:
-        tmp = tmp + tNorm(OneGraph(it[0],it[1],level+1),tNorm(it[2],it[3]))
-        # tmp += OneGraph(it[0],it[1],level+1)
+        
+        tmp = tmp + OneGraph(it[0],it[1],level+1,it[2],it[3])
+        # print(tNorm(it[2],it[3]),weights[level],"now")
 
-    similarity = (nume + alpha[level+1]*tmp)/deno
-    # print(similarity, tmp, alpha[level+1],level, deno, nume)
+    if level > 0:
+        # print(tNorm((nume+tmp)/deno,tNorm(x,y))*weights[level],level)
+        # print(nume,tmp,deno)
+        return tNorm((nume+tmp)/deno,tNorm(x,y))*weights[level]
+    
+    if level == 0:
+        # print(weights[level]*(nume+tmp)/deno)
+        # print(nume,tmp,deno)
+        return weights[level]*(nume+tmp)/deno
 
-    return similarity
 
-
-sim = OneGraph('A1','B1', 0)
+sim = OneGraph('A1','B1', 0, 1, 1)
 print("Similarity between A1 and B1 is %.4f" %(sim))
