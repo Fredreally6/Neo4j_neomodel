@@ -11,7 +11,7 @@ def OneGraph(a, b, level, x, y):
 
     global weights
     
-    if level >= 3:
+    if level >= layer:
         return 0
     
     # Match nodes
