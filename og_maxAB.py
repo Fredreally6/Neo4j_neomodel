@@ -15,12 +15,12 @@ def OneGraph(a, b, level, x, y):
         return 0
     
     # Match nodes
-    if (a == 'A1' or a == 'B1'):
+    if (a == 'A' or a == 'B'):
         queryA = "MATCH (i:Rootnode {name: \'"+ a +"\' })-[j]->(k) return i,j,k"
     else:
         queryA = "MATCH (i:Normalnode {name: \'"+ a +"\' })-[j]->(k) return i,j,k"
     
-    if (b == 'B1' or b == 'A1'):
+    if (b == 'B' or b == 'A'):
         queryB = "MATCH (i:Rootnode {name: \'"+ b +"\' })-[j]->(k) return i,j,k"
     else:
         queryB = "MATCH (i:Normalnode {name: \'"+ b +"\' })-[j]->(k) return i,j,k"
@@ -85,9 +85,11 @@ def OneGraph(a, b, level, x, y):
     print(pair_result)
     print(" ")
 
+    if deno == 0:
+        return 0
+
     tmp = 0
     for it in pair_result:
-        
         tmp = tmp + OneGraph(it[0],it[1],level+1,it[2],it[3])
         # print(tNorm(it[2],it[3]),weights[level],"now")
 
@@ -102,5 +104,5 @@ def OneGraph(a, b, level, x, y):
         return weights[level]*(nume+tmp)/deno
 
 
-sim = OneGraph('A1','B1', 0, 1, 1)
+sim = OneGraph('A','B', 0, 1, 1)
 print("Similarity between A1 and B1 is %.4f" %(sim))

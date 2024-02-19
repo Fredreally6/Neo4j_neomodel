@@ -7,7 +7,7 @@ config.DATABASE_URL = "bolt://neo4j:password@localhost:7687"
 
 db.cypher_query("MATCH (n) DETACH DELETE n")
 
-data = pd.read_csv('data/data_test.csv')
+data = pd.read_csv('data/example3.csv')
 
 entity1 = data.iloc[:,0]
 rela = data.iloc[:,1]
@@ -19,14 +19,13 @@ for i in range(0,data.shape[1]):
     label.append(data.columns[i])
 
 
-nodea1 = Rootnode(name = 'A1').save()
-nodeb1 = Rootnode(name = 'B1').save()
-nodea2 = Rootnode(name = 'A2').save()
-nodeb2 = Rootnode(name = 'B2').save()
+nodea = Rootnode(name = 'A').save()
+nodeb = Rootnode(name = 'B').save()
+
 
 for i in range(0, data.shape[0]):
     isRoot = False
-    if(entity1[i]=='A1' or entity1[i]=='B1' or entity1[i]=='A2' or entity1[i]=='B2'):
+    if(entity1[i]=='A' or entity1[i]=='B'):
         node1 = Rootnode.nodes.get(name = entity1[i])
         isRoot = True
     # elif(entity1[i]=='B1'):
