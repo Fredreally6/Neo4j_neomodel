@@ -5,7 +5,7 @@ from weights import InHypOWA
 config.DATABASE_URL = "bolt://neo4j:password@localhost:7687"
 
 weights = []
-layer = 3
+layer = 2
 
 def OneGraph(a, b, level, x, y):
 
