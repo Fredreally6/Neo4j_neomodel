@@ -4,8 +4,9 @@ from weights import InHypOWA
 
 config.DATABASE_URL = "bolt://neo4j:password@localhost:7687"
 
-weights = []
-layer = 2
+weights = [1.0]
+layer = 3
+alpha = 0.5
 
 def OneGraph(a, b, level, x, y):
 
@@ -65,7 +66,11 @@ def OneGraph(a, b, level, x, y):
             v = 1
         else:
             v = len(numelist)
-        weights = InHypOWA(v,layer)
+        if layer < 3:
+            weights.append(alpha)
+        else:
+            weights = weights + InHypOWA(v,layer-1)
+        print(weights)
 
     for i in range(len(result_list_A)):
         denoA = denoA + result_list_A[i][3]
