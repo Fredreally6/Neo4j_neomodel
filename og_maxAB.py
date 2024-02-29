@@ -70,6 +70,7 @@ def OneGraph(a, b, level, x, y):
             weights.append(alpha)
         else:
             weights = weights + InHypOWA(v,layer-1)
+        # print(v)
         print(weights)
 
     for i in range(len(result_list_A)):
@@ -110,4 +111,4 @@ def OneGraph(a, b, level, x, y):
 
 
 sim = OneGraph('A','B', 0, 1, 1)
-print("Similarity between A1 and B1 is %.4f" %(sim))
+print("Similarity between A and B is %.4f" %(sim))

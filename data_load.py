@@ -7,7 +7,7 @@ config.DATABASE_URL = "bolt://neo4j:password@localhost:7687"
 
 db.cypher_query("MATCH (n) DETACH DELETE n")
 
-data = pd.read_csv('data/example2.csv')
+data = pd.read_csv('data/example1as.csv')
 
 entity1 = data.iloc[:,0]
 rela = data.iloc[:,1]
