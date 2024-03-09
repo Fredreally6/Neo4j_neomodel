@@ -88,7 +88,7 @@ def OneGraphA2B(a, b, level, x, y):
     print(pair_result)
     print(" ")
 
-    if denoA == 0:
+    if denoB == 0:
         return 0
 
     tmp = 0
@@ -99,15 +99,15 @@ def OneGraphA2B(a, b, level, x, y):
     if level > 0:
         # print(tNorm((nume+tmp)/deno,tNorm(x,y))*weights[level],level)
         # print(nume,tmp,deno)
-        return tNorm((nume+tmp)/denoA,tNorm(x,y))*weights[level]
+        return tNorm((nume+tmp)/denoB,tNorm(x,y))*weights[level]
     
     if level == 0:
         # print(weights[level]*(nume+tmp)/deno)
         # print(nume,tmp,deno)
-        return weights[level]*(nume+tmp)/denoA
+        return weights[level]*(nume+tmp)/denoB
 
 
-sim = OneGraphA2B('B','A', 0, 1, 1)
+sim = OneGraphA2B('A','B', 0, 1, 1)
 print("Similarity A to B is %.4f" %(sim))
 
 # simA2B = OneGraphA2B('A','B', 0, 1, 1)
